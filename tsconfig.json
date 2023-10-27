@@ -6,7 +6,7 @@
       "outDir": "dist",
       "declarationMap": true,
       "allowSyntheticDefaultImports": true,
-      "lib": ["ES2020"],
+      "lib": ["ES2020", "DOM"],
       "module": "CommonJS",
       "moduleResolution": "node",
       "target": "ES2020",

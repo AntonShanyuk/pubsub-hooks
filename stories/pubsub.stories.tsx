@@ -1,5 +1,5 @@
 import React from 'react';
-import { createPubsub } from '../index';
+import { createPubsub } from 'pubsub-hooks';
 import { Meta } from '@storybook/react';
 
 const pubSub = createPubsub({ counter: 0 });
