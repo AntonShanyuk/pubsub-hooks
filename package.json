@@ -1,0 +1,49 @@
+{
+  "name": "pubsub-hooks",
+  "version": "0.0.1",
+  "description": "PubSub implementation for react",
+  "files": [
+    "dist"
+  ],
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "yarn build:clean && tsc",
+    "build:clean": "rm -rf ./dist",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AntonShanyuk/pubsub-hooks.git"
+  },
+  "author": "Anton Shaniuk",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AntonShanyuk/pubsub-hooks/issues"
+  },
+  "homepage": "https://github.com/AntonShanyuk/pubsub-hooks#readme",
+  "devDependencies": {
+    "@babel/preset-env": "^7.23.2",
+    "@babel/preset-react": "^7.22.15",
+    "@babel/preset-typescript": "^7.23.2",
+    "@storybook/addon-essentials": "^7.5.1",
+    "@storybook/addon-interactions": "^7.5.1",
+    "@storybook/addon-links": "^7.5.1",
+    "@storybook/addon-onboarding": "^1.0.8",
+    "@storybook/blocks": "^7.5.1",
+    "@storybook/react": "^7.5.1",
+    "@storybook/react-webpack5": "^7.5.1",
+    "@storybook/testing-library": "^0.2.2",
+    "react-dom": "^18.2.0",
+    "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "react": ">= 17",
+    "rxjs": ">=7",
+    "storybook": "^7.5.1"
+  },
+  "peerDependencies": {
+    "react": ">= 17",
+    "rxjs": ">=7"
+  }
+}
