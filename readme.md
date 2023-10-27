@@ -1,5 +1,14 @@
+# Installation
+```bash
+yarn add pubsub-hooks
+```
+
+# Demo
+https://antonshanyuk.github.io/pubsub-hooks/?path=/story/pubsub-example--pub-sub
+
+# Usage
 ```tsx
-import { createPubsub } from '../index';
+import { createPubsub } from 'pubsub-hooks';
 
 const pubSub = createPubsub({ counter: 0 });
 
