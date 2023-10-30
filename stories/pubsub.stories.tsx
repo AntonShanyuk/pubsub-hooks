@@ -1,11 +1,26 @@
 import React from 'react';
-import { createPubsub } from 'pubsub-hooks';
 import { Meta } from '@storybook/react';
 
-const pubSub = createPubsub({ counter: 0 });
+import { createPubsub, SubjectsStorage } from '../index';
+
+
+const initialState = { counter: 0 };
+enum StateKeys {
+  Counter = 'counter',
+};
+
+declare global {
+  interface Window {
+    pubsub: Record<string, SubjectsStorage<typeof initialState>>;
+  }
+}
+
+window.pubsub = {};
+
+const pubSub = createPubsub<typeof initialState, StateKeys>(initialState, window.pubsub);
 
 const Incrementer = () => {
-  const increment = pubSub.usePub('counter', x => x + 1);
+  const increment = pubSub.usePub(StateKeys.Counter, x => x + 1);
 
   return (
     <button onClick={increment}>Increment</button>
@@ -13,7 +28,7 @@ const Incrementer = () => {
 }
 
 const Decrementer = () => {
-  const decrement = pubSub.usePub('counter', x => x - 1);
+  const decrement = pubSub.usePub(StateKeys.Counter, x => x - 1);
 
   return (
     <button onClick={decrement}>Decrement</button>
@@ -21,7 +36,7 @@ const Decrementer = () => {
 }
 
 const Static = () => {
-  const update = pubSub.usePub('counter', () => 42);
+  const update = pubSub.usePub(StateKeys.Counter, () => 42);
 
   return (
     <button onClick={update}>Set 42</button>
@@ -29,7 +44,7 @@ const Static = () => {
 }
 
 const Subscriber = () => {
-  const counter = pubSub.useSub('counter');
+  const counter = pubSub.useSub(StateKeys.Counter);
 
   return (
     <div>{counter}</div>

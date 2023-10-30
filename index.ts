@@ -13,25 +13,25 @@ function getSubject<T extends PubsubRecord, U extends  keyof T = keyof T>(
 }
 
 export type PubsubRecord = Record<string | number | symbol, unknown>;
-export type SubjectsStorage<T extends PubsubRecord, U extends  keyof T = keyof T> =
-  Record<U, BehaviorSubject<T[U]>>;
+export type SubjectsStorage<TState extends PubsubRecord, TKey extends  keyof TState = keyof TState> =
+  Record<TKey, BehaviorSubject<TState[TKey]>>;
 
-export type Pubsub<T extends PubsubRecord> = {
-  usePub<U extends keyof T>(name: U, callback: (value: T[U]) => T[U]): () => void;
-  useSub<U extends keyof T>(name: U): T[U];
+export type Pubsub<TState extends PubsubRecord, TKey extends keyof TState = keyof TState> = {
+  usePub<TValue extends TKey = TKey>(name: TValue, callback: (value: TState[TValue]) => TState[TValue]): () => void;
+  useSub<TValue extends TKey = TKey>(name: TValue): TState[TValue];
 };
 
-export const createPubsub = <T extends PubsubRecord, U extends keyof T = keyof T>(
-  defaults: T,
-  storage: (SubjectsStorage<T, U> | {}) = {},
-): Pubsub<T> => {
+export const createPubsub = <TState extends PubsubRecord, TKey extends keyof TState = keyof TState>(
+  defaults: TState,
+  storage: (SubjectsStorage<TState, TKey> | {}) = {},
+): Pubsub<TState, TKey> => {
 
   return {
-    usePub<U extends keyof T>(name: U, callback: (value: T[U]) => T[U]) {
-      const subject = getSubject<T>(name, defaults, storage as SubjectsStorage<T, keyof T>);
+    usePub<TValue extends TKey = TKey>(name: TValue, callback: (value: TState[TValue]) => TState[TValue]) {
+      const subject = getSubject<TState>(name, defaults, storage as SubjectsStorage<TState, keyof TState>);
       
       return useCallback(() => {
-        const currentValue = subject.getValue() as T[U];
+        const currentValue = subject.getValue() as TState[TValue];
         const nextValue = callback(currentValue);
         
         if (nextValue !== currentValue) {
@@ -39,13 +39,13 @@ export const createPubsub = <T extends PubsubRecord, U extends keyof T = keyof T
         }
       }, [subject, callback])
     },
-    useSub<U extends keyof T>(name: U): T[U] {
-      const subject = getSubject<T>(name, defaults, storage as SubjectsStorage<T, keyof T>);
+    useSub<TValue extends TKey = TKey>(name: TKey): TState[TValue] {
+      const subject = getSubject<TState>(name, defaults, storage as SubjectsStorage<TState, keyof TState>);
     
-      const [state, setState] = useState<T[U]>(subject.getValue() as T[U]);
+      const [state, setState] = useState<TState[TValue]>(subject.getValue() as TState[TValue]);
     
       useEffect(() => {
-        const subscription = subject.subscribe(setState as ((value: T[U]) => void));
+        const subscription = subject.subscribe(setState as ((value: TState[TValue]) => void));
     
         return () => subscription.unsubscribe();
       }, [subject, setState]);
