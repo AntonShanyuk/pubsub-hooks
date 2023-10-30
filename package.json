@@ -1,7 +1,8 @@
 {
   "name": "pubsub-hooks",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "PubSub implementation for react",
+  "keywords": ["react hooks pubsub state"],
   "files": [
     "dist"
   ],
