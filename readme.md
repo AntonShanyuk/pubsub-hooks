@@ -114,13 +114,13 @@ window.pubsub.counter.subscribe((value) =>
 
 # Types and intellisense
 ## Naming conflicts
-To ensure you dont have naming conflicts in your store, you may explicitly set enum for the stirage keys:
+To ensure you dont have naming conflicts in your store, you may explicitly set enum for the storage keys:
 
 ```ts
 const initialState = { counter: 0, showCounter: false };
 enum StateKeys {
   Counter = 'counter',
-  showCounter = 'showCounter',
+  ShowCounter = 'showCounter',
 };
 
 const pubSub = createPubsub<typeof initialState, StateKeys>(initialState);
@@ -128,7 +128,7 @@ const pubSub = createPubsub<typeof initialState, StateKeys>(initialState);
 This way you'll be forced to use this enum everywhere in your app:
 ![Enum animation](readme-images/enum_keys.gif)
 # Explicit type for the storage
-You may also pass the type for the state explicitly instead of using `typeof initialState`:
+You may also pass the type for the storage explicitly instead of using `typeof initialState`:
 
 ```ts
 const initialState = {};
