@@ -43,6 +43,23 @@ const Static = () => {
   );
 }
 
+const UpdateWithCustomEvent =  () => {
+  const update = pubSub.usePub(StateKeys.Counter)
+  return (
+    <ComponentWithCustomEvent onSetValue={update} />
+  );
+};
+
+type ChildProps = {
+  onSetValue: (value: number) => void;
+};
+const ComponentWithCustomEvent = (props: ChildProps) => {
+  
+  return (
+    <button onClick={() => props.onSetValue(34)}>Set 34 from child component</button>
+  );
+};
+
 const Subscriber = () => {
   const counter = pubSub.useSub(StateKeys.Counter);
 
@@ -58,6 +75,7 @@ export const PubSub = () => {
         <Incrementer />
         <Decrementer />
         <Static />
+        <UpdateWithCustomEvent />
       </div>
       <div>
         <br />

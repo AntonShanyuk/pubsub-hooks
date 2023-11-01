@@ -17,7 +17,8 @@ export type SubjectsStorage<TState extends PubsubRecord, TKey extends  keyof TSt
   Record<TKey, BehaviorSubject<TState[TKey]>>;
 
 export type Pubsub<TState extends PubsubRecord, TKey extends keyof TState = keyof TState> = {
-  usePub<TValue extends TKey = TKey>(name: TValue, callback?: (value: TState[TValue]) => TState[TValue]): (value: TState[TValue]) => void;
+  usePub<TValue extends TKey = TKey>(name: TValue, callback: (value: TState[TValue]) => TState[TValue]): () => void;
+  usePub<TValue extends TKey = TKey>(name: TValue): (value: TState[TValue]) => void;
   useSub<TValue extends TKey = TKey>(name: TValue): TState[TValue];
 };
 
@@ -30,10 +31,10 @@ export const createPubsub = <TState extends PubsubRecord, TKey extends keyof TSt
     usePub<TValue extends TKey = TKey>(name: TValue, callback?: (value: TState[TValue]) => TState[TValue]) {
       const subject = getSubject<TState>(name, defaults, storage as SubjectsStorage<TState, keyof TState>);
       
-      return useCallback((value: TState[TValue]) => {
+      return useCallback((value?: TState[TValue]) => {
         const currentValue = subject.getValue() as TState[TValue];
 
-        const nextValue = callback ? callback(value) : value;
+        const nextValue = callback ? callback(currentValue) : value;;
         
         if (nextValue !== currentValue) {
           subject.next(nextValue);

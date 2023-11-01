@@ -1,6 +1,6 @@
 {
   "name": "pubsub-hooks",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "PubSub implementation for react",
   "keywords": [
     "react hooks pubsub state"
@@ -43,9 +43,13 @@
     "storybook": "^7.5.2",
     "typescript": "^5.2.2"
   },
-  "dependencies": {},
   "peerDependencies": {
     "react": ">= 17",
     "rxjs": ">=7"
+  },
+  "resolutions": {
+    "string-width": "^4",
+    "jackspeak": "^2",
+    "strip-ansi": "^6"
   }
 }

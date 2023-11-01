@@ -11,7 +11,7 @@ yarn add rxjs pubsub-hooks
 https://antonshanyuk.github.io/pubsub-hooks/?path=/story/pubsub-example--pub-sub
 
 # Usage
-1. create pubSub instance which will be shared accross the app
+### Create pubSub instance which will be shared accross the app
 ```tsx
 // pubSub.ts
 
@@ -19,28 +19,7 @@ import { createPubsub } from 'pubsub-hooks';
 
 export default createPubsub({ counter: 0 });
 ```
-2. Push the updates
-```tsx
-//updateComponent.tsx 
-
-import pubSub from './pubSub.ts';
-
-const UpdateComponent = () => {
-  // If you need to set a static value
-  const staticUpdate = pubSub.usePub('counter', () => 42);
-  // If you need an existing value for the update
-  const increment = pubSub.usePub('counter', x => x + 1);
-
-  return (
-    <>
-      <button onClick={staticUpdate}>Set 42</button>
-      <button onClick={increment}>Increment</button>
-    </>
-  );
-}
-
-```
-3. Subscribe for updates
+### Subscribe for updates
 ```tsx
 //subscriberComponent.tsx
 
@@ -51,6 +30,43 @@ const SubscriberComponent = () => {
     <div>{counter}</div>
   );
 }
+```
+### Push the updates
+```tsx
+//updateComponent.tsx 
+
+import pubSub from './pubSub.ts';
+
+const UpdateComponent = () => {
+  // If you need to set a static value
+  const staticUpdate = pubSub.usePub('counter', () => 42);
+
+  // If you need an existing value for the update
+  const increment = pubSub.usePub('counter', x => x + 1);
+
+  // Only pass the key if the event sets value directly
+  // this equals to pubSub.usePub('counter', x => x);
+  const updateFromChild = pubSub.usePub('counter')
+
+  return (
+    <>
+      <button onClick={staticUpdate}>Set 42</button>
+      <button onClick={increment}>Increment</button>
+      <ComponentWithCustomEvent onSetValue={updateFromChild} />
+    </>
+  );
+}
+
+type ChildProps = {
+  onSetValue: (value: number) => void;
+};
+const ComponentWithCustomEvent = (props: ChildProps) => {
+  
+  return (
+    <button onClick={() => props.onSetValue(34)}>Set 34 from child component</button>
+  );
+};
+
 ```
 # Caveats
 If you use `React.memo` for you components - make sure to wrap `usePub` callbacks into `React.useCallback`, especially if you use variables from the outer scope:
@@ -64,7 +80,7 @@ const increment = pubSub.usePub('counter',
 ```
 # Debugging
 
-When creating a pubSub instance for your app you may want to have a possibility to check the state of your app. You may achive that buy passing defining a global variable and passing it as an optional argument of `createPubsub`:
+When creating a pubSub instance for your app you may want to have a possibility to check the state of your app. You may achive that by passing defining a global variable and passing it as an optional argument of `createPubsub`:
 
 ```ts
 import { createPubsub, SubjectsStorage } from 'pubsub-hooks';
