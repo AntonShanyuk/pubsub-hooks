@@ -18,14 +18,6 @@ https://antonshanyuk.github.io/pubsub-hooks/?path=/story/pubsub-example--pub-sub
 import { createPubsub } from 'pubsub-hooks';
 
 export default createPubsub({ counter: 0 });
-
-const Static = () => {
-  const update = pubSub.usePub('counter', () => 42);
-
-  return (
-    <button onClick={update}>Set 42</button>
-  );
-}
 ```
 2. Push the updates
 ```tsx
