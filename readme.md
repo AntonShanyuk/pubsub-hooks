@@ -46,7 +46,7 @@ const UpdateComponent = () => {
 
   // Only pass the key if the event sets value directly
   // this equals to pubSub.usePub('counter', x => x);
-  const updateFromChild = pubSub.usePub('counter')
+  const update = pubSub.usePub('counter')
 
   return (
     <>
