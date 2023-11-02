@@ -52,20 +52,12 @@ const UpdateComponent = () => {
     <>
       <button onClick={staticUpdate}>Set 42</button>
       <button onClick={increment}>Increment</button>
-      <ComponentWithCustomEvent onSetValue={updateFromChild} />
+      <button onClick={() => {
+        update(false);
+      }}>Set 34</button>
     </>
   );
 }
-
-type ChildProps = {
-  onSetValue: (value: number) => void;
-};
-const ComponentWithCustomEvent = (props: ChildProps) => {
-  
-  return (
-    <button onClick={() => props.onSetValue(34)}>Set 34 from child component</button>
-  );
-};
 
 ```
 # Caveats
@@ -80,7 +72,7 @@ const increment = pubSub.usePub('counter',
 ```
 # Debugging
 
-When creating a pubSub instance for your app you may want to have a possibility to check the state of your app. You may achive that by passing defining a global variable and passing it as an optional argument of `createPubsub`:
+When creating a pubSub instance for your app you may want to have a possibility to check the state of your app. You may achive that by defining a global variable and passing it as an optional argument of `createPubsub`:
 
 ```ts
 import { createPubsub, SubjectsStorage } from 'pubsub-hooks';

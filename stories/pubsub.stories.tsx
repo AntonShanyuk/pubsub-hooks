@@ -4,9 +4,15 @@ import { Meta } from '@storybook/react';
 import { createPubsub, SubjectsStorage } from '../index';
 
 
-const initialState = { counter: 0 };
+const initialState = { counter: 0, showCounter: false };
 enum StateKeys {
   Counter = 'counter',
+  ShowCounter = 'showCounter',
+};
+
+type State = {
+  counter: number,
+  showCounter: boolean,
 };
 
 declare global {
@@ -43,20 +49,12 @@ const Static = () => {
   );
 }
 
-const UpdateWithCustomEvent =  () => {
-  const update = pubSub.usePub(StateKeys.Counter)
+const UpdateWithCallback =  () => {
+  const update = pubSub.usePub(StateKeys.ShowCounter)
   return (
-    <ComponentWithCustomEvent onSetValue={update} />
-  );
-};
-
-type ChildProps = {
-  onSetValue: (value: number) => void;
-};
-const ComponentWithCustomEvent = (props: ChildProps) => {
-  
-  return (
-    <button onClick={() => props.onSetValue(34)}>Set 34 from child component</button>
+    <button onClick={() => {
+      update(false);
+    }}>Set 34</button>
   );
 };
 
@@ -75,7 +73,7 @@ export const PubSub = () => {
         <Incrementer />
         <Decrementer />
         <Static />
-        <UpdateWithCustomEvent />
+        <UpdateWithCallback />
       </div>
       <div>
         <br />
