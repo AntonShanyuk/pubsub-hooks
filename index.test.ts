@@ -1,11 +1,6 @@
 import { BehaviorSubject } from 'rxjs';
 import { getSubject, SubjectsStorage, createPubsub } from './index';
-import { act, renderHook, waitFor } from '@testing-library/react'
-
-
-// const initialState = { counter: 0 };
-// const storage = {} as SubjectsStorage<typeof initialState>;
-// const pubsub = createPubsub(initialState, storage);
+import { act, renderHook } from '@testing-library/react'
 
 type State = {
   counter: number

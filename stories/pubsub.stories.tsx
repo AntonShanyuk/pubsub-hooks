@@ -4,10 +4,10 @@ import { Meta } from '@storybook/react';
 import { createPubsub, SubjectsStorage } from '../index';
 
 
-const initialState = { counter: 0 };
+const initialState = { counter: 0 }
 enum StateKeys {
   Counter = 'counter',
-};
+}
 
 declare global {
   interface Window {

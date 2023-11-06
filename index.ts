@@ -24,7 +24,7 @@ export type Pubsub<TState extends PubsubRecord, TKey extends keyof TState = keyo
 
 export const createPubsub = <TState extends PubsubRecord, TKey extends keyof TState = keyof TState>(
   defaults: TState,
-  storage: (SubjectsStorage<TState, TKey> | {}) = {},
+  storage: (SubjectsStorage<TState, TKey> | object) = {},
 ): Pubsub<TState, TKey> => {
 
   return {
@@ -34,7 +34,7 @@ export const createPubsub = <TState extends PubsubRecord, TKey extends keyof TSt
       return useCallback((value?: TState[TValue]) => {
         const currentValue = subject.getValue() as TState[TValue];
 
-        const nextValue = callback ? callback(currentValue) : value;;
+        const nextValue = callback ? callback(currentValue) : value;
         
         if (nextValue !== currentValue) {
           subject.next(nextValue);
