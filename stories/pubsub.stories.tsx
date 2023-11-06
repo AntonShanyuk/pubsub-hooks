@@ -4,15 +4,9 @@ import { Meta } from '@storybook/react';
 import { createPubsub, SubjectsStorage } from '../index';
 
 
-const initialState = { counter: 0, showCounter: false };
+const initialState = { counter: 0 };
 enum StateKeys {
   Counter = 'counter',
-  ShowCounter = 'showCounter',
-};
-
-type State = {
-  counter: number,
-  showCounter: boolean,
 };
 
 declare global {
@@ -50,10 +44,10 @@ const Static = () => {
 }
 
 const UpdateWithCallback =  () => {
-  const update = pubSub.usePub(StateKeys.ShowCounter)
+  const update = pubSub.usePub(StateKeys.Counter)
   return (
     <button onClick={() => {
-      update(false);
+      update(34);
     }}>Set 34</button>
   );
 };

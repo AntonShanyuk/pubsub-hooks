@@ -1,7 +1,7 @@
 import { BehaviorSubject } from 'rxjs';
 import { useCallback, useState, useEffect } from 'react';
 
-function getSubject<T extends PubsubRecord, U extends  keyof T = keyof T>(
+export function getSubject<T extends PubsubRecord, U extends  keyof T = keyof T>(
   name: U,
   defaults: T,
   storage:  SubjectsStorage<T, U>,
