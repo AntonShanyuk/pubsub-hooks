@@ -60,7 +60,7 @@ describe('unittests', () => {
 
 describe('acceptance tests', () => {
   test('useSub + usPub: increment', async () => {
-    const pubsub = createPubsub(initialState, storage);
+    const pubsub = createPubsub(initialState);
 
     const useSub = renderHook(() => pubsub.useSub('counter'));
     const usePub = renderHook(() => pubsub.usePub('counter', x => x + 1));
@@ -73,7 +73,7 @@ describe('acceptance tests', () => {
   });
 
   test('useSub + usPub: set value in callback', async () => {
-    const pubsub = createPubsub(initialState, storage);
+    const pubsub = createPubsub(initialState);
 
     const useSub = renderHook(() => pubsub.useSub('counter'));
     const usePub = renderHook(() => pubsub.usePub('counter'));
@@ -86,7 +86,7 @@ describe('acceptance tests', () => {
   });
 
   test('useSub + usPub: set static value', async () => {
-    const pubsub = createPubsub(initialState, storage);
+    const pubsub = createPubsub(initialState);
 
     const useSub = renderHook(() => pubsub.useSub('counter'));
     const usePub = renderHook(() => pubsub.usePub('counter', () => 42));
