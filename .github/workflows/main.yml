@@ -1,7 +1,7 @@
 name: Lint and tests
 on: [push]
 jobs:
-  check-bats-version:
+  lint-tests:
     runs-on: ubuntu-latest
     steps:
       - name: Setup Node.js environment
