@@ -1,6 +1,10 @@
 {
   "name": "pubsub-hooks",
   "version": "0.2.3",
+  "engines": {
+    "node": "18.18.2",
+    "npm": "9.8.1"
+  },
   "description": "PubSub implementation for react",
   "keywords": [
     "react hooks pubsub state"
