@@ -14,12 +14,12 @@
   ],
   "main": "dist/index.js",
   "scripts": {
-    "build": "yarn build:clean && tsc",
+    "build": "npm run build:clean && tsc",
     "build:clean": "rm -rf ./dist",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "test": "yarn jest --coverage",
-    "lint": "yarn eslint ."
+    "test": "jest --coverage",
+    "lint": "eslint ."
   },
   "repository": {
     "type": "git",

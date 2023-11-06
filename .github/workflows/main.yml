@@ -9,9 +9,8 @@ jobs:
         with:
           node-version: 18.18.2
       - uses: actions/checkout@v4
-      - run: npm install -g yarn
-      - run: yarn
-      - run: yarn lint
-      - run: yarn test
+      - run: npm install
+      - run: npm run lint
+      - run: npm run test
 
 
