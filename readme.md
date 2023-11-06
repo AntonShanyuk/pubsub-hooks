@@ -2,6 +2,8 @@
 # Motivation
 State management in React as easy as possible
 
+See more in the article: https://medium.com/@antonshanyuk/pubsub-as-an-alternative-of-redux-making-state-management-as-easy-as-possible-43216ccc83f1
+
 # Installation
 ```bash
 yarn add rxjs pubsub-hooks
