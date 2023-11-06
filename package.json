@@ -61,10 +61,5 @@
     "react": ">= 17",
     "rxjs": ">=7"
   },
-  "resolutions": {
-    "string-width": "^4",
-    "jackspeak": "^2",
-    "strip-ansi": "^6"
-  },
   "dependencies": {}
 }
