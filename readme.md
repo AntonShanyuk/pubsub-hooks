@@ -1,3 +1,4 @@
+[![Lint and tests](https://github.com/AntonShanyuk/pubsub-hooks/actions/workflows/main.yml/badge.svg)](https://github.com/AntonShanyuk/pubsub-hooks/actions/workflows/main.yml)
 # Motivation
 State management in React as easy as possible
 
